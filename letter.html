@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ma lettre pour Habibi 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+
+  <!-- Musique de fond romantique -->
+  <audio id="bg-music" autoplay>
+    <source src="https://orangefreesounds.com/wp-content/uploads/2023/02/Romantic-background-music-intro.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container">
+    <h1>Pour toi, Habibi ❤️</h1>
+
+    <div class="letter-box">
+      <p id="typewriter"></p>
+    </div>
+
+    <button id="memoriesBtn" class="hidden">Voir nos souvenirs 📸</button>
+  </div>
+
+  <script>
+    const text = `Habibi,
+
+Si tu lis ces mots, c’est que cette lettre a trouvé ton cœur avant tes yeux.
+Je ne suis peut-être pas toujours parfait avec les mots, mais avec toi, tout devient simple, vrai, évident.
+
+Chaque jour, tu es cette lumière qui calme mes doutes, ce sourire qui donne du sens à mes efforts.
+Je n’ai pas besoin de grands discours pour savoir une chose : c’est toi que je choisis, aujourd’hui et encore demain.
+
+Cette lettre n’est pas qu’un message, c’est une promesse silencieuse :
+marcher à tes côtés, te faire rire, te soutenir, et t’aimer, même dans les jours imparfaits.
+
+Joyeuse Saint-Valentin, Habibi. ❤️
+
+— Mr_BK ❤️`;
+
+    const target = document.getElementById("typewriter");
+    const button = document.getElementById("memoriesBtn");
+    let i = 0;
+    const speed = 30;
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      } else {
+        // Quand le texte est fini, on affiche le bouton
+        button.classList.remove("hidden");
+        button.classList.add("show");
+      }
+    }
+
+    window.addEventListener("load", typeWriter);
+
+    button.addEventListener("click", () => {
+      window.location.href = "memories.html";
+    });
+  </script>
+
+</body>
+</html>

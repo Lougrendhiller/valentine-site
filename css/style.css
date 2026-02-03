@@ -1,0 +1,186 @@
+/* =========================
+   RESET + BASE
+   ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* =========================
+   BODY : Fond romantique
+   ========================= */
+body {
+  height: 100vh;
+  background: radial-gradient(circle at top, #8b0000, #000000 70%);
+  color: white;
+  overflow: hidden; /* Empêche le scroll global */
+}
+
+/* =========================
+   CONTAINER PRINCIPAL
+   ========================= */
+.container {
+  position: relative;
+  z-index: 2;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Centre verticalement */
+  text-align: center;
+  padding: 20px;
+}
+
+/* =========================
+   TITRE
+   ========================= */
+h1 {
+  margin-bottom: 20px;
+  font-size: 2.2rem;
+  color: #ffd1dc;
+  text-shadow: 0 0 10px rgba(255, 100, 100, 0.6);
+}
+
+/* =========================
+   GALERIE (IMAGES + VIDEO)
+   ========================= */
+.gallery {
+  width: 100%;
+  max-width: 900px;               /* Largeur max de la galerie */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Tous les éléments de la galerie ont la même taille */
+.gallery img,
+.gallery video {
+  width: 100%;
+  height: 200px;                  /* 👈 Taille uniforme */
+  object-fit: cover;              /* 👈 Coupe sans déformer */
+  border-radius: 12px;
+  background: #000;
+  box-shadow: 0 0 10px rgba(255, 0, 80, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Effet au survol */
+.gallery img:hover,
+.gallery video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 80, 0.8);
+}
+
+/* =========================
+   ENVELOPPE ANIMÉE (si utilisée)
+   ========================= */
+.envelope {
+  font-size: 120px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: float 3s ease-in-out infinite;
+}
+
+.envelope:hover {
+  transform: scale(1.1);
+}
+
+/* Animation flottante */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Petit texte d’indication */
+.hint {
+  margin-top: 15px;
+  opacity: 0.8;
+}
+
+/* =========================
+   BOUTONS
+   ========================= */
+button {
+  margin-top: 25px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  background: #c4002f;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 0, 80, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 80, 0.9);
+}
+
+/* =========================
+   CLASSES UTILITAIRES
+   ========================= */
+.hidden {
+  display: none;
+}
+
+/* =========================
+   ANIMATION DES CŒURS
+   ========================= */
+.heart {
+  position: absolute;
+  top: -20px;
+  font-size: 20px;
+  color: rgba(255, 80, 120, 0.8);
+  animation: fall linear forwards;
+}
+
+/* Chute des cœurs */
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+/* =========================
+   BOÎTE DE LETTRE (TEXTE)
+   ========================= */
+.letter-box {
+  max-width: 700px;
+  max-height: 60vh;               /* Scroll si le texte est long */
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(255, 0, 80, 0.4);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ffd1dc;
+  white-space: pre-wrap;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   ANIMATION APPARITION
+   ========================= */
+.show {
+  display: inline-block;
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

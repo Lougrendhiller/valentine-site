@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nos souvenirs 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Nos souvenirs ❤️</h1>
+
+    <div class="gallery">
+      <!-- Images -->
+      <img src="assets/ardie.jpg" alt="Souvenir 1">
+      <img src="assets/ardie2.jpg" alt="Souvenir 2">
+
+      <!-- Vidéo (lecture automatique, en boucle, sans image avant) -->
+      <video class="gallery-item" autoplay muted loop playsinline>
+        <source src="assets/Elle.MP4" type="video/mp4">
+        Ton navigateur ne supporte pas la vidéo.
+      </video>
+
+      <img src="assets/Nous.JPG" alt="Souvenir 5">
+      <img src="assets/appel.PNG" alt="Souvenir 6">
+    </div>
+
+    <button id="finalBtn">Un dernier message 💌</button>
+  </div>
+
+  <script>
+    const finalBtn = document.getElementById("finalBtn");
+    finalBtn.addEventListener("click", () => {
+      window.location.href = "final.html";
+    });
+  </script>
+
+</body>
+</html>

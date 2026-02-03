@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pour toi, mon amour 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* Reset basique */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #8b0000, #000000 70%);
+      color: #ffd1dc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 0, 80, 0.4);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #ffd1dc;
+      text-shadow: 0 0 10px rgba(255, 100, 100, 0.6);
+    }
+
+    /* Image du bouquet */
+    .bouquet {
+      width: 180px;
+      max-width: 60%;
+      margin: 0 auto 25px auto;
+      display: block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Boîte du message */
+    .message-box {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #ffd1dc;
+      white-space: pre-wrap; /* pour respecter les retours à la ligne */
+      min-height: 200px;     /* évite que tout bouge pendant l'écriture */
+    }
+
+    .signature {
+      margin-top: 20px;
+      font-style: italic;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Pour toi, mon amour 💖</h1>
+
+    <!-- Image du bouquet (remplace le fichier par le tien si tu veux) -->
+    <img src="assets/bouquet.png" alt="Bouquet de fleurs" class="bouquet">
+
+    <!-- Zone où le texte va s'écrire -->
+    <div id="message" class="message-box"></div>
+
+    <div id="signature" class="signature"></div>
+  </div>
+
+  <script>
+    // Ton message final (tu peux modifier le texte ici)
+    const text = `Ma chérie,
+
+Je me souviens encore de notre rencontre, de ce moment simple qui, sans que je m’en rende compte, a tout changé.
+Il n’y a pas eu de bruit, pas de grand discours… juste ce petit quelque chose qui m’a fait comprendre que tu n’étais pas comme les autres.
+
+Petit à petit, j’ai appris à aimer ta façon d’être, ton sourire, ta présence.
+Et sans prévenir, c’est devenu évident pour moi : j’avais eu ce coup de foudre discret, mais sincère.
+
+Je ne te promets pas un monde parfait,
+mais je te promets quelque chose de vrai, avec mon cœur, simplement.
+
+Merci d’être toi.`;
+
+    const signature = "— Mr BK";
+
+    const messageEl = document.getElementById("message");
+    const signatureEl = document.getElementById("signature");
+
+    let index = 0;
+
+    function typeWriter() {
+      if (index < text.length) {
+        messageEl.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 35); // vitesse d'écriture (plus petit = plus rapide)
+      } else {
+        // Quand le message est fini, on affiche la signature
+        setTimeout(() => {
+          signatureEl.textContent = signature;
+        }, 500);
+      }
+    }
+
+    // Lancer l'animation d'écriture au chargement de la page
+    window.addEventListener("load", typeWriter);
+  </script>
+
+</body>
+</html>
