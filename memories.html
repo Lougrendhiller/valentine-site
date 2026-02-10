@@ -1,45 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Nos souvenirs 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Nos souvenirs 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Nos souvenirs ❤️</h1>
 
-  <div class="container">
-    <h1>Nos souvenirs ❤️</h1>
+      <div class="gallery">
+        <!-- Images -->
+        <img src="assets/ardie.jpg" alt="Souvenir 1" />
+        <img src="assets/ardie2.jpg" alt="Souvenir 2" />
 
-    <div class="gallery">
-      <!-- Images -->
-      <img src="assets/ardie.jpg" alt="Souvenir 1">
-      <img src="assets/ardie2.jpg" alt="Souvenir 2">
+        <!-- Vidéo (lecture automatique, en boucle, sans image avant) -->
+        <video class="gallery-item" autoplay muted loop playsinline>
+          <source src="assets/Elle.MP4" type="video/mp4" />
+          Ton navigateur ne supporte pas la vidéo.
+        </video>
 
-      <!-- Vidéo (lecture automatique, en boucle, sans image avant) -->
-      <video class="gallery-item" autoplay muted loop playsinline>
-        <source src="assets/Elle.MP4" type="video/mp4">
-        Ton navigateur ne supporte pas la vidéo.
-      </video>
+        <video class="gallery-item" autoplay muted loop playsinline>
+          <source src="assets/video.mp4" type="video/mp4" />
+          Ton navigateur ne supporte pas la vidéo.
+        </video>
 
-      <video class="gallery-item" autoplay muted loop playsinline>
-        <source src="assets/video.mp4" type="video/mp4">
-        Ton navigateur ne supporte pas la vidéo.
-      </video>
+        <img src="assets/Nous.JPG" alt="Souvenir 5" />
+        <img src="assets/appel.PNG" alt="Souvenir 6" />
+      </div>
 
-      <img src="assets/Nous.JPG" alt="Souvenir 5">
-      <img src="assets/appel.PNG" alt="Souvenir 6">
+      <button id="finalBtn">Un dernier message 💌</button>
     </div>
 
-    <button id="finalBtn">Un dernier message 💌</button>
-  </div>
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="lightbox">
+      <span class="lightbox-close">&times;</span>
+    </div>
 
-  <script>
-    const finalBtn = document.getElementById("finalBtn");
-    finalBtn.addEventListener("click", () => {
-      window.location.href = "final.html";
-    });
-  </script>
+    <script>
+      /* Navigation vers la page finale */
+      const finalBtn = document.getElementById("finalBtn");
+      if (finalBtn) {
+        finalBtn.addEventListener("click", () => {
+          window.location.href = "final.html";
+        });
+      }
 
-</body>
+      /* --- LOGIQUE LIGHTBOX --- */
+      const lightbox = document.getElementById("lightbox");
+      const closeBtn = document.querySelector(".lightbox-close");
+      const galleryItems = document.querySelectorAll(
+        ".gallery img, .gallery video",
+      );
+
+      const openLightbox = (item) => {
+        lightbox.classList.add("active");
+
+        // Cloner l'élément cliqué
+        const clone = item.cloneNode(true);
+
+        // Lui donner la classe pour le style CSS
+        clone.classList.remove("gallery-item"); // si présent
+        clone.classList.add("lightbox-media");
+
+        // Réinitialiser les styles inline qui pourraient gêner
+        clone.style = "";
+
+        // Si c'est une vidéo : activer son, contrôles, autoplay
+        if (clone.tagName === "VIDEO") {
+          clone.controls = true;
+          clone.muted = false; // activer le son
+          clone.autoplay = true;
+          clone.loop = true;
+
+          // Petite astuce pour forcer le son si le navigateur bloque l'autoplay non muté
+          clone.play().catch((err) => {
+            console.log(
+              "Autoplay avec son bloqué par le navigateur, mode muet activé.",
+            );
+            clone.muted = true;
+            clone.play();
+          });
+        }
+
+        // Nettoyer l'ancien contenu (sauf le bouton close)
+        const oldMedia = lightbox.querySelector(".lightbox-media");
+        if (oldMedia) {
+          oldMedia.remove();
+        }
+
+        // Ajouter le nouveau média
+        lightbox.appendChild(clone);
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove("active");
+        const media = lightbox.querySelector(".lightbox-media");
+        if (media) {
+          if (media.tagName === "VIDEO") media.pause();
+          // On attend la fin de la transition CSS (0.3s) pour remove ?
+          // Pas obligatoirement, mais c'est plus propre de le virer tout de suite ou après.
+          // Ici on le vire direct, l'opacité du lightbox cache le tout.
+          media.remove();
+        }
+      };
+
+      // Attacher les événements sur les items de la galerie
+      galleryItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.preventDefault(); // Pour éviter les comportements par défaut
+          openLightbox(item);
+        });
+      });
+
+      // Bouton de fermeture
+      closeBtn.addEventListener("click", closeLightbox);
+
+      // Clic en dehors de l'image pour fermer
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Touche Echap pour fermer
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("active")) {
+          closeLightbox();
+        }
+      });
+    </script>
+  </body>
 </html>
